@@ -1,5 +1,6 @@
 import { SquareTerminal } from "lucide-react";
 import { Button } from "../ui/button";
+import { invoke } from "@tauri-apps/api/core";
 
 export default function AppNav() {
   return (
@@ -26,9 +27,14 @@ function LeftNav() {
 }
 
 function RightNav() {
+  const handleClick = () => {
+    // Call Rust backend to open a command prompt and run the content prep tool.
+    invoke("launch_win32_content_prep_tool");
+  };
+
   return (
     <div>
-      <Button className="bg-blue-500 hover:bg-red-400">
+      <Button onClick={handleClick} className="bg-blue-500 hover:bg-red-400">
         <SquareTerminal />
         Launch CLI
       </Button>
