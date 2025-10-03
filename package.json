@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "lint": "eslint",
-    "format": "prettier . --write",
+    "format": "npm run format:js && npm run format:rust",
+    "format:js": "prettier . --write",
+    "format:rust": "cargo fmt --manifest-path src-tauri/Cargo.toml --all",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
