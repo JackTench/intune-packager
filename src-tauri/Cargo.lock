@@ -1705,6 +1705,7 @@ dependencies = [
 name = "intune-packager"
 version = "0.1.0"
 dependencies = [
+ "dirs",
  "serde",
  "serde_json",
  "tauri",
