@@ -12,9 +12,6 @@ pub fn download_win32_content_prep_tool() {
 
     // Get repository.
     if !path.exists() {
-        println!("Downloading Win32 Content Prep Tool!");
         Repository::clone(URL, path).expect("Failed to download the Microsoft tool.");
-    } else {
-        println!("Skipping download!");
     }
 }
