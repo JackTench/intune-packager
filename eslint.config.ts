@@ -3,25 +3,27 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default defineConfig([
   {
     ignores: [
-      "dist/**", 
-      "node_modules/**", 
+      "dist/**",
+      "node_modules/**",
       "src-tauri/**",
       "**/*.config.js",
       "**/*.config.ts",
       "build/**",
-      "public/**"
-    ]
+      "public/**",
+    ],
   },
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser }
+    languageOptions: { globals: globals.browser },
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  eslintConfigPrettier,
 ]);
