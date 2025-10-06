@@ -11,9 +11,18 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![launch_win32_content_prep_tool])
+        .invoke_handler(tauri::generate_handler![
+            launch_win32_content_prep_tool,
+            test_print
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+// DEBUG: Function just prints 1 str argument passed from the JS side.
+#[tauri::command]
+fn test_print(arg: String) {
+    println!("{}", arg);
 }
 
 #[tauri::command]
