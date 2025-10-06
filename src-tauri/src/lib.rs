@@ -1,7 +1,7 @@
 pub mod download;
 pub mod utils;
 
-use std::process::Command;
+use std::{path::PathBuf, process::Command};
 
 use crate::utils::get_data_directory;
 
@@ -22,7 +22,8 @@ pub fn run() {
 // DEBUG: Function just prints 1 str argument passed from the JS side.
 #[tauri::command]
 fn test_print(arg: String) {
-    println!("{}", arg);
+    let path = PathBuf::from(arg);
+    println!("{:?}", path);
 }
 
 #[tauri::command]
