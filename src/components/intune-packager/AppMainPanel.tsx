@@ -30,7 +30,7 @@ export default function AppMainPanel() {
       <Button className="bg-blue-500" onClick={onSubmit}>
         Save
       </Button>
-      <p className="text-gray-400 text-center">
+      <p className="text-sm text-gray-400 text-center">
         Note: All files in the folder containing the selected file will be
         included in the Intune package.
       </p>
