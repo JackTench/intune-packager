@@ -1,9 +1,12 @@
 pub mod download;
+pub mod intune;
 pub mod utils;
 
-use std::process::Command;
+use std::{fs::rename, path::PathBuf, process::Command};
 
-use crate::utils::get_data_directory;
+use native_dialog::FileDialog;
+
+use crate::{intune::package, utils::get_data_directory};
 
 // Entry point for Tauri.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -12,17 +15,39 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            launch_win32_content_prep_tool,
-            test_print
+            package_app,
+            launch_win32_content_prep_tool
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
 
-// DEBUG: Function just prints 1 str argument passed from the JS side.
 #[tauri::command]
-fn test_print(arg: String) {
-    println!("{}", arg);
+fn package_app(arg: String) {
+    // Get path(s) of exe and parent folder.
+    let exe_path = PathBuf::from(arg);
+    let folder_path = exe_path.parent().unwrap().to_path_buf();
+
+    // Dialog box to save file.
+    let save_path = FileDialog::new()
+        .set_location(&folder_path)
+        .add_filter("Intune Package", &["intunewin"])
+        .show_save_single_file()
+        .unwrap()
+        .unwrap();
+    let output_dir = save_path.parent().unwrap().to_path_buf();
+
+    // Create package.
+    package(folder_path.clone(), exe_path.clone(), output_dir.clone());
+
+    // Rename output to match save box.
+    let generated_path = output_dir.join(format!(
+        "{}.intunewin",
+        exe_path.file_stem().unwrap().to_string_lossy()
+    ));
+    if generated_path.exists() {
+        rename(&generated_path, &save_path).expect("Failed to rename output file.")
+    }
 }
 
 #[tauri::command]

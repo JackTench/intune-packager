@@ -26,3 +26,4 @@ serde_json = "1"
 
 dirs = "6.0.0"
 git2 = "0.20.2"
+native-dialog = "0.7.0"
