@@ -1,6 +1,6 @@
-import { SquareTerminal } from "lucide-react";
 import { Button } from "../ui/button";
 import { invoke } from "@tauri-apps/api/core";
+import { SquareTerminal } from "lucide-react";
 
 export default function AppNav() {
   return (

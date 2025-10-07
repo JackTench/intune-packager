@@ -1,5 +1,5 @@
-import AppNav from "./components/intune-packager/AppNav";
 import AppMainPanel from "./components/intune-packager/AppMainPanel";
+import AppNav from "./components/intune-packager/AppNav";
 
 export default function App() {
   return (

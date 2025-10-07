@@ -1,7 +1,8 @@
-import { invoke } from "@tauri-apps/api/core";
 import { useState } from "react";
-import AppFileSelect from "./AppFileSelect";
+
 import { Button } from "../ui/button";
+import AppFileSelect from "./AppFileSelect";
+import { invoke } from "@tauri-apps/api/core";
 
 export default function AppMainPanel() {
   const [path, setPath] = useState<string | string[] | null>(null);
