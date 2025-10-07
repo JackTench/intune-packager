@@ -9,7 +9,7 @@ export default function App() {
 
   const onSubmit = async () => {
     // call rust here.
-    await invoke("test_print", { arg: path });
+    await invoke("package_app", { arg: path });
   };
 
   return (
