@@ -5,9 +5,11 @@ import AppFileSelect from "./AppFileSelect";
 import { invoke } from "@tauri-apps/api/core";
 
 export default function AppMainPanel() {
+  // State management for path selected.
   const [path, setPath] = useState<string | string[] | null>(null);
 
   const onSubmit = async () => {
+    // Invoke the Rust code that calls the content prep tool.
     await invoke("package_app", { arg: path });
   };
 

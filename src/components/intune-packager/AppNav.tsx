@@ -28,12 +28,13 @@ function LeftNav() {
 
 function RightNav() {
   const handleClick = () => {
-    // Call Rust backend to open a command prompt and run the content prep tool.
+    // Invoke the Rust code that calls the content prep tool.
     invoke("launch_win32_content_prep_tool");
   };
 
   return (
     <div>
+      {/* Button to launch the CLI utility for manual use. */}
       <Button onClick={handleClick} className="bg-blue-500 hover:bg-red-400">
         <SquareTerminal />
         Launch CLI
