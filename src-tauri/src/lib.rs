@@ -1,9 +1,12 @@
 pub mod download;
+pub mod intune;
 pub mod utils;
 
 use std::{path::PathBuf, process::Command};
 
-use crate::utils::get_data_directory;
+use native_dialog::FileDialog;
+
+use crate::{intune::package, utils::get_data_directory};
 
 // Entry point for Tauri.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -12,6 +15,7 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
+            package_app,
             launch_win32_content_prep_tool,
             test_print
         ])
@@ -24,6 +28,24 @@ pub fn run() {
 fn test_print(arg: String) {
     let path = PathBuf::from(arg);
     println!("{:?}", path);
+}
+
+#[tauri::command]
+fn package_app(arg: String) {
+    // Get path(s) of exe and parent folder.
+    let exe_path = PathBuf::from(arg);
+    let folder_path = exe_path.parent().unwrap().to_path_buf();
+
+    // Dialog box to save file.
+    let save_path = FileDialog::new()
+        .set_location(&folder_path)
+        .add_filter("Intune Package", &["intunewin"])
+        .show_save_single_file()
+        .unwrap()
+        .unwrap();
+
+    // Create package.
+    package(folder_path, exe_path, save_path);
 }
 
 #[tauri::command]
