@@ -13,7 +13,7 @@ export default function AppMainPanel() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-12">
-      <p className="text-white text-center">
+      <p className="text-center text-white">
         Select an executable to package for Intune.
       </p>
       <AppFileSelect
@@ -30,7 +30,7 @@ export default function AppMainPanel() {
       <Button className="bg-blue-500" onClick={onSubmit}>
         Save
       </Button>
-      <p className="text-sm text-gray-400 text-center">
+      <p className="text-center text-sm text-gray-400">
         Note: All files in the folder containing the selected file will be
         included in the Intune package.
       </p>

@@ -4,7 +4,7 @@ import { SquareTerminal } from "lucide-react";
 
 export default function AppNav() {
   return (
-    <nav className="flex w-full items-center justify-between border-b px-4 py-2 bg-gray-800">
+    <nav className="flex w-full items-center justify-between border-b bg-gray-800 px-4 py-2">
       <div className="flex items-center">
         <LeftNav />
       </div>
@@ -19,7 +19,7 @@ function LeftNav() {
   return (
     <div className="flex items-center">
       <img src="logo.png" width={32} height={32} alt="Intune Packager" />
-      <span className="text-xl text-gray-400 font-semibolt px-4">
+      <span className="font-semibolt px-4 text-xl text-gray-400">
         Intune Packager
       </span>
     </div>

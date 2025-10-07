@@ -40,14 +40,14 @@ export default function AppFileSelect({
   };
 
   return (
-    <div className="px-8 space-y-2">
+    <div className="space-y-2 px-8">
       <span className="text-white">{label}</span>
       <div className="flex items-center">
         <Input className="flex-1 rounded-r-none" value={display} readOnly />
         <Button
           type="button"
           onClick={handlePick}
-          className="rounded-l-none bg-gray-200 hover:bg-blue-200 text-black"
+          className="rounded-l-none bg-gray-200 text-black hover:bg-blue-200"
         >
           Open
         </Button>
