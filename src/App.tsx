@@ -16,7 +16,9 @@ export default function App() {
     <div className="min-h-screen bg-linear-to-tr from-gray-700 to-sky-900">
       <AppNav />
       <div className="flex flex-col items-center justify-center gap-4 py-12">
-        <p className="text-white text-center">The body content goes here.</p>
+        <p className="text-white text-center">
+          Select an executable to package for Intune.
+        </p>
         <AppFileSelect
           label="Select file:"
           value={path}
@@ -29,7 +31,7 @@ export default function App() {
           ]}
         />
         <Button className="bg-blue-500" onClick={onSubmit}>
-          Submit
+          Save
         </Button>
         <p className="text-gray-400 text-center">
           Note: All files in the folder containing the selected file will be
