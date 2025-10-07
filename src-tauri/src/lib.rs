@@ -16,18 +16,10 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             package_app,
-            launch_win32_content_prep_tool,
-            test_print
+            launch_win32_content_prep_tool
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-}
-
-// DEBUG: Function just prints 1 str argument passed from the JS side.
-#[tauri::command]
-fn test_print(arg: String) {
-    let path = PathBuf::from(arg);
-    println!("{:?}", path);
 }
 
 #[tauri::command]
