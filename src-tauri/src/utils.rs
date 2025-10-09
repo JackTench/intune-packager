@@ -4,14 +4,16 @@ use dirs::data_local_dir;
 
 use crate::download::download_win32_content_prep_tool;
 
-pub fn boot() {
+pub fn boot() -> anyhow::Result<()> {
     // Call get_data_directory() so it creates the directory on first launch.
-    get_data_directory();
+    get_data_directory()?;
     // Download Win32 Content Prep Tool.
-    download_win32_content_prep_tool();
+    download_win32_content_prep_tool()?;
+
+    Ok(())
 }
 
-pub fn get_data_directory() -> PathBuf {
+pub fn get_data_directory() -> anyhow::Result<PathBuf> {
     // Use dirs to find the data directory.
     let mut path = data_local_dir().expect("Failed to find the user's local data directory.");
     path.push("intune-packager");
@@ -21,5 +23,5 @@ pub fn get_data_directory() -> PathBuf {
         create_dir_all(&path).expect("Failed to create the data directory.");
     }
 
-    path
+    Ok(path)
 }

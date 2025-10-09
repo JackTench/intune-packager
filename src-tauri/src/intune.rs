@@ -4,9 +4,9 @@ use native_dialog::FileDialog;
 
 use crate::utils::get_data_directory;
 
-pub fn launch_win32_content_prep_tool() {
+pub fn launch_win32_content_prep_tool() -> anyhow::Result<()> {
     // Get path of the exe.
-    let mut path = get_data_directory();
+    let mut path = get_data_directory()?;
     path.push("Microsoft-Win32-Content-Prep-Tool");
     path.push("IntuneWinAppUtil.exe");
 
@@ -17,9 +17,11 @@ pub fn launch_win32_content_prep_tool() {
         .args(["/C", "start", "", exe_path])
         .status()
         .expect("Failed to launch Win32 Content Prep Tool.");
+
+    Ok(())
 }
 
-pub fn package_app(arg: String) {
+pub fn package_app(arg: String) -> anyhow::Result<()> {
     // Get path(s) of exe and parent folder.
     let exe_path = PathBuf::from(arg);
     let folder_path = exe_path.parent().unwrap().to_path_buf();
@@ -34,7 +36,7 @@ pub fn package_app(arg: String) {
     let output_dir = save_path.parent().unwrap().to_path_buf();
 
     // Create package.
-    package(folder_path.clone(), exe_path.clone(), output_dir.clone());
+    package(folder_path.clone(), exe_path.clone(), output_dir.clone())?;
 
     // Rename output to match save box.
     let generated_path = output_dir.join(format!(
@@ -44,11 +46,13 @@ pub fn package_app(arg: String) {
     if generated_path.exists() {
         rename(&generated_path, &save_path).expect("Failed to rename output file.")
     }
+
+    Ok(())
 }
 
-fn package(c: PathBuf, s: PathBuf, o: PathBuf) {
+fn package(c: PathBuf, s: PathBuf, o: PathBuf) -> anyhow::Result<()> {
     // Get path of the exe.
-    let mut path = get_data_directory();
+    let mut path = get_data_directory()?;
     path.push("Microsoft-Win32-Content-Prep-Tool");
     path.push("IntuneWinAppUtil.exe");
 
@@ -69,4 +73,6 @@ fn package(c: PathBuf, s: PathBuf, o: PathBuf) {
         ])
         .status()
         .expect("Failed to launch Win32 Content Prep Tool.");
+
+    Ok(())
 }

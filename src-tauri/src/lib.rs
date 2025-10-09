@@ -20,10 +20,10 @@ pub fn run() {
 
 #[tauri::command]
 fn js_package_app(arg: String) {
-    package_app(arg);
+    package_app(arg).expect("Failed to launch Win32 Content Prep Tool.");
 }
 
 #[tauri::command]
 fn js_launch_win32_content_prep_tool() {
-    launch_win32_content_prep_tool();
+    launch_win32_content_prep_tool().expect("Failed to launch Win32 Content Prep Tool.");
 }
