@@ -54,9 +54,9 @@ pub fn package_app(arg: String) -> anyhow::Result<()> {
 
 fn package(c: PathBuf, s: PathBuf, o: PathBuf) -> anyhow::Result<()> {
     // Get path of the exe.
-    let mut path = get_data_directory()?;
-    path.push("Microsoft-Win32-Content-Prep-Tool");
-    path.push("IntuneWinAppUtil.exe");
+    let path = get_data_directory()?
+        .join("Microsoft-Win32-Content-Prep-Tool")
+        .join("IntuneWinAppUtil.exe");
 
     // Package app using Win32 Content Prep Tool.
     let _ = Command::new("cmd")
