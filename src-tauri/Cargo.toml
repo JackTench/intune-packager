@@ -1,6 +1,6 @@
 [package]
 name = "intune-packager"
-version = "1.0.0"
+version = "1.0.2"
 description = "Creates .intunewin packages."
 authors = ["Jack Tench"]
 edition = "2021"
