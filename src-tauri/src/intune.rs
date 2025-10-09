@@ -46,7 +46,7 @@ pub fn package_app(arg: String) {
     }
 }
 
-pub fn package(c: PathBuf, s: PathBuf, o: PathBuf) {
+fn package(c: PathBuf, s: PathBuf, o: PathBuf) {
     // Get path of the exe.
     let mut path = get_data_directory();
     path.push("Microsoft-Win32-Content-Prep-Tool");
