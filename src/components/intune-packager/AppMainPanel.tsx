@@ -10,7 +10,7 @@ export default function AppMainPanel() {
 
   const onSubmit = async () => {
     // Invoke the Rust code that calls the content prep tool.
-    await invoke("package_app", { arg: path });
+    await invoke("js_package_app", { arg: path });
   };
 
   return (

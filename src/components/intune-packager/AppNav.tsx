@@ -29,7 +29,7 @@ function LeftNav() {
 function RightNav() {
   const handleClick = () => {
     // Invoke the Rust code that calls the content prep tool.
-    invoke("launch_win32_content_prep_tool");
+    invoke("js_launch_win32_content_prep_tool");
   };
 
   return (
