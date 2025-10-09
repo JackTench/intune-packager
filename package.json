@@ -11,6 +11,7 @@
     "clean": "npm run clean:js && npm run clean:rust",
     "clean:js": "rimraf node_modules dist build",
     "clean:rust": "cargo clean --manifest-path src-tauri/Cargo.toml",
+    "reset": "npm run clean && npm install && cargo build --manifest-path src-tauri/Cargo.toml",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
