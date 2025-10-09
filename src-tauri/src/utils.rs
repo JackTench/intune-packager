@@ -15,8 +15,9 @@ pub fn boot() -> anyhow::Result<()> {
 
 pub fn get_data_directory() -> anyhow::Result<PathBuf> {
     // Use dirs to find the data directory.
-    let mut path = data_local_dir().expect("Failed to find the user's local data directory.");
-    path.push("intune-packager");
+    let path = data_local_dir()
+        .expect("Failed to find user's localappdata folder.")
+        .join("intune-packager");
 
     // Create the data directory if it does not already exist.
     if !path.exists() {

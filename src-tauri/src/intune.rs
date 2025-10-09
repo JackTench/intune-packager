@@ -6,9 +6,9 @@ use crate::utils::get_data_directory;
 
 pub fn launch_win32_content_prep_tool() -> anyhow::Result<()> {
     // Get path of the exe.
-    let mut path = get_data_directory()?;
-    path.push("Microsoft-Win32-Content-Prep-Tool");
-    path.push("IntuneWinAppUtil.exe");
+    let path = get_data_directory()?
+        .join("Microsoft-Win32-Content-Prep-Tool")
+        .join("IntuneWinAppUtil.exe");
 
     // Convert to string for the command line.
     let exe_path = path.to_str().expect("Invalid path to exe.");
