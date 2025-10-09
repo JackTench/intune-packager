@@ -27,6 +27,8 @@ pub fn package_app(arg: String) -> anyhow::Result<()> {
     let folder_path = exe_path.parent().unwrap().to_path_buf();
 
     // Dialog box to save file.
+    // TODO: Replace using native-dialog with using the Tauri plugin.
+    // This keeps the dependency count low, but will need state management setting up.
     let save_path = FileDialog::new()
         .set_location(&folder_path)
         .add_filter("Intune Package", &["intunewin"])
