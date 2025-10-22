@@ -1,6 +1,6 @@
 use std::{fs::rename, path::PathBuf, process::Command};
 
-use native_dialog::FileDialog;
+use native_dialog::{FileDialog, MessageDialog};
 
 use crate::utils::get_data_directory;
 
@@ -22,6 +22,12 @@ pub fn launch_win32_content_prep_tool() -> anyhow::Result<()> {
 }
 
 pub fn package_app(arg: String) -> anyhow::Result<()> {
+    // Show disclaimer.
+    let _ = MessageDialog::new()
+        .set_title("Intune Packager Alert!")
+        .set_text("Warning: The whole folder containing the selected file will be contained in the Intune package.")
+        .show_alert();
+
     // Get path(s) of exe and parent folder.
     let exe_path = PathBuf::from(arg);
     let folder_path = exe_path.parent().unwrap().to_path_buf();
